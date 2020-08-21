@@ -1,0 +1,46 @@
+@startuml
+
+' 披萨抽象类，包含流程方法与名字字段
+abstract class Pizza {
+    # name: String
+    + {abstract} prepare(): void
+    + bake(): void
+    + cut(): void
+    + box(): void
+}
+
+' 具体类
+class SZCheesePizza
+class SZPepperPizza
+class LDCheesePizza
+class LDPepperPizza
+
+' 披萨工厂
+interface PizzaFactory {
+    + createPizza(orderType: String): Pizza
+    + {static} getFactory(city: String): PizzaFactory
+}
+
+' 披萨工厂子类（深圳）
+class SZPizzaFactory
+
+' 披萨工厂子类（伦敦）
+class LDPizzaFactory
+
+Pizza <|-- SZPepperPizza
+Pizza <|-- SZCheesePizza
+Pizza <|-- LDPepperPizza
+Pizza <|-- LDCheesePizza
+
+PizzaFactory <|-- SZPizzaFactory
+PizzaFactory <|-- LDPizzaFactory
+
+PizzaFactory --> Pizza: createPizza >
+
+SZCheesePizza <.. SZPizzaFactory
+SZPepperPizza <.. SZPizzaFactory
+
+LDCheesePizza <.. LDPizzaFactory
+LDPepperPizza <.. LDPizzaFactory
+
+@enduml
