@@ -1,0 +1,53 @@
+@startuml
+
+' 披萨抽象类，包含流程方法与名字字段
+abstract class Pizza {
+    # name: String
+    + {abstract} prepare(): void
+    + bake(): void
+    + cut(): void
+    + box(): void
+}
+' 具体类
+class CheesePizza
+class GreekPizza
+
+' 简易工厂
+class SimpleFactory
+
+' 订单类
+class OrderPizza1
+class OrderPizza2
+class OrderPizza3
+
+' 披萨店
+class PizzaStore1 {
+    + orderPizza: OrderPizza1
+}
+class PizzaStore2 {
+    + orderPizza: OrderPizza2
+}
+class PizzaStore3 {
+    + orderPizza: OrderPizza3
+}
+
+' 泛化
+Pizza <|-- GreekPizza
+Pizza <|-- CheesePizza
+
+' 依赖
+Pizza <.. SimpleFactory
+CheesePizza <.. SimpleFactory
+GreekPizza <.. SimpleFactory
+
+' 聚合
+SimpleFactory --o OrderPizza1
+SimpleFactory --o OrderPizza2
+SimpleFactory --o OrderPizza3
+
+' 聚合
+OrderPizza1 --o PizzaStore1
+OrderPizza2 --o PizzaStore2
+OrderPizza3 --o PizzaStore3
+
+@enduml

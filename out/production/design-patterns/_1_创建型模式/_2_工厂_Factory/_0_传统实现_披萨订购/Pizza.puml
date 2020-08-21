@@ -1,0 +1,44 @@
+@startuml
+
+abstract class Pizza {
+    # name: String
+    + {abstract} prepare(): void
+    + bake(): void
+    + cut(): void
+    + box(): void
+}
+class CheesePizza
+class GreekPizza
+class OrderPizza1
+class OrderPizza2
+class OrderPizza3
+class PizzaStore1 {
+    + orderPizza: OrderPizza
+}
+class PizzaStore2 {
+    + orderPizza: OrderPizza
+}
+class PizzaStore3 {
+    + orderPizza: OrderPizza
+}
+
+Pizza <|-- CheesePizza
+Pizza <|-- GreekPizza
+
+OrderPizza1 ..> Pizza
+OrderPizza1 ..> CheesePizza
+OrderPizza1 ..> GreekPizza
+
+OrderPizza2 ..> Pizza
+OrderPizza2 ..> CheesePizza
+OrderPizza2 ..> GreekPizza
+
+OrderPizza3 ..> Pizza
+OrderPizza3 ..> CheesePizza
+OrderPizza3 ..> GreekPizza
+
+PizzaStore1 o-- OrderPizza1
+PizzaStore2 o-- OrderPizza2
+PizzaStore3 o-- OrderPizza3
+
+@enduml
