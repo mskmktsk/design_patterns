@@ -1,0 +1,30 @@
+@startuml
+
+class Voltage220V {
+    + output220V(): int
+}
+
+abstract class Voltage5V {
+    + output5V(): int
+}
+
+class VoltageAdapter implements Voltage5V {
+    - voltage220V: Voltage220V
+    + VoltageAdapter(voltage220V: Voltage220V): VoltageAdapter
+}
+
+class Phone {
+    + changing(): void
+}
+
+class Client
+
+Voltage220V --o VoltageAdapter
+
+Phone --> Voltage5V
+
+Client ..> Phone
+Client ..> VoltageAdapter
+Client ..> Voltage220V
+
+@enduml
