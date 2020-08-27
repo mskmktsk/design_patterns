@@ -29,8 +29,8 @@ class HongqiCar extends RefindCar {
 
 class HongqiEngine implements Engine
 
-Car --> Engine
+Car o--> Engine
 
-HongqiCar *--> HongqiEngine
+HongqiCar o--> HongqiEngine
 
 @enduml
