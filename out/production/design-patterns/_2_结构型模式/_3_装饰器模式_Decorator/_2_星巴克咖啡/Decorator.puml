@@ -1,0 +1,42 @@
+@startuml
+
+abstract class Drink {
+    - desc: String
+    - price: double
+    + getDesc(): String
+    + setDesc(desc: String): void
+    + getPrice(): double
+    + setPrice(price: double): void
+
+    + {abstract} cost(): double
+}
+
+class Coffee extends Drink
+note bottom of Coffee: "一般咖啡，价格 5.00"
+
+class Espresso extends Coffee {
+    + Espresso(): Espresso
+}
+note top of Espresso: "意式咖啡，价格 6.00"
+
+class Americano extends Coffee {
+    + Americano(): Americano
+}
+note top of Americano: "美式咖啡，价格 6.00"
+
+abstract class Decorator extends Drink {
+    # drink: Drink
+    # Decorator(drink: Drink): Decorator
+}
+
+class Milk extends Decorator {
+    + Milk(drink: Drink): Milk
+}
+note top of Milk: "牛奶，价格 3.00"
+
+class Chocolate extends Decorator {
+    + Chocolate(drink: Drink): Chocolate
+}
+note top of Chocolate: "巧克力，价格 3.00"
+
+@enduml

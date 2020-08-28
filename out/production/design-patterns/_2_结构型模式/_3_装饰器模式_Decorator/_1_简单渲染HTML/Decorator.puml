@@ -1,0 +1,34 @@
+@startuml
+
+' 装饰器模式就是套娃模式
+' Java IO 流就是经典的装饰器模式
+
+interface TextNode {
+    + setText(text: String): void
+    + getText(): String
+}
+
+class SpanNode implements TextNode {
+    - text: String
+}
+
+abstract class NodeDecorator implements TextNode {
+    # target: TextNode
+    + NodeDecorator(target: TextNode): NodeDecorator
+}
+
+class BoldDecorator extends NodeDecorator {
+    + BoldDecorator(target: TextNode): BoldDecorator
+}
+
+class UnderlineDecorator extends NodeDecorator {
+    + UnderlineDecorator(target: TextNode): UnderlineDecorator
+}
+
+class ItalicDecorator extends NodeDecorator {
+    + ItalicDecorator(target: TextNode): ItalicDecorator
+}
+
+TextNode --o NodeDecorator
+
+@enduml
