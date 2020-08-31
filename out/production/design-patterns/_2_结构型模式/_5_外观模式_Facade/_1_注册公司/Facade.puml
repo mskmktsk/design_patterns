@@ -1,0 +1,41 @@
+@startuml
+
+class Company {
+    - name: String
+    - id: String
+    - bankAccount: String
+    - taxCode: String
+
+    + setName(name: String): void
+    + getName(): String
+    {method} ...
+}
+
+class AdminOfIndustry {
+    + register(name: String): Company
+    - createCompanyId(): String
+}
+
+class Bank {
+    + openAccount(id: String): String
+}
+
+class Taxation {
+    + applyTaxCode(id: String): String
+}
+
+class Facade {
+    - admin: AdminOfIndustry
+    - bank: Bank
+    - taxation: Taxation
+    + openCompany(String name): Company
+}
+
+Facade o--> AdminOfIndustry
+Facade o--> Bank
+Facade o--> Taxation
+
+Company <-- Facade
+Company <-- AdminOfIndustry
+
+@enduml

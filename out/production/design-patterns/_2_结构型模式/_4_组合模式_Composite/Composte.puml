@@ -1,0 +1,27 @@
+@startuml
+
+interface Node {
+    + {abstract} add(Node node): Node
+    + {abstract} children(): List<Node>
+    + {abstract} toXML(): String
+}
+
+class ElementNode implements Node {
+    - name: String
+    - list: List<Node>
+    + ElementNode(name: String): ElementNode
+}
+
+class TextNode implements Node {
+    - text: String
+    + TextNode(text: String): TextNode
+}
+
+class CommentNode implements Node {
+    - text: String
+    + CommentNode(text: String): CommentNode
+}
+
+ElementNode o-->Node
+
+@enduml
