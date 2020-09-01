@@ -1,0 +1,24 @@
+@startuml
+
+interface UserAction {
+    + {abstract} signin(): void
+    + {abstract} signout(): void
+    + {abstract} register(): void
+    + {abstract} forget(): void
+}
+
+class User implements UserAction
+
+class UserActionProxy implements UserAction {
+    - user: User
+    + UserActionProxy(user: User): UserActionProxy
+}
+
+class Main
+
+User <--o UserActionProxy
+
+Main ..> User
+Main ..> UserActionProxy
+
+@enduml
