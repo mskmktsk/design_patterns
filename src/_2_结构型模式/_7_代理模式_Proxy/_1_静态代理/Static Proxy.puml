@@ -10,8 +10,8 @@ interface UserAction {
 class User implements UserAction
 
 class UserActionProxy implements UserAction {
-    - user: User
-    + UserActionProxy(user: User): UserActionProxy
+    - target: User
+    + UserActionProxy(target: User): UserActionProxy
 }
 
 class Main
