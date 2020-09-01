@@ -1,17 +1,17 @@
 @startuml
 
-interface UserAction {
+interface Action {
     + {abstract} signin(): void
     + {abstract} signout(): void
     + {abstract} register(): void
     + {abstract} forget(): void
 }
 
-class User implements UserAction
+class User implements Action
 
-class UserActionProxy implements UserAction {
-    - target: User
-    + UserActionProxy(target: User): UserActionProxy
+class UserActionProxy implements Action {
+    - target: Action
+    + UserActionProxy(target: Action): UserActionProxy
 }
 
 class Main
