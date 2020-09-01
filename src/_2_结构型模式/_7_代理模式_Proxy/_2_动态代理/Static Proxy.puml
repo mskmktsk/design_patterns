@@ -1,0 +1,25 @@
+@startuml
+
+interface UserAction {
+    + {abstract} signin(): void
+    + {abstract} signout(): void
+    + {abstract} register(): void
+    + {abstract} forget(): void
+}
+
+class User implements UserAction
+
+class ProxyFactory {
+    - target: UserAction
+    + ProxyFactory(target: UserAction): ProxyFactory
+    + getProxyInstance(): Object
+}
+
+class Main
+
+UserAction <--o ProxyFactory
+
+ProxyFactory <.. Main
+User <.. Main
+
+@enduml
