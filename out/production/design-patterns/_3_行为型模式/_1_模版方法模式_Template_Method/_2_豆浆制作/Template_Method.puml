@@ -1,0 +1,23 @@
+@startuml
+
+abstract class SoyaMilk {
+    + make(): void
+    - select(): void
+    # {abstract} addCondiments(): void
+    - soak(): void
+    - beat(): void
+    # customerWantCondiments(): boolean
+}
+class RedBeanSoyaMilk extends SoyaMilk
+class PeanutSoyaMilk extends SoyaMilk
+class PureSoyaMilk extends SoyaMilk {
+    # customerWantCondiments(): boolean
+}
+note left of PureSoyaMilk: 重写了 customerWantCondiments
+
+SoyaMilk <.. Main
+RedBeanSoyaMilk <.. Main
+PeanutSoyaMilk <.. Main
+PureSoyaMilk <.. Main
+
+@enduml

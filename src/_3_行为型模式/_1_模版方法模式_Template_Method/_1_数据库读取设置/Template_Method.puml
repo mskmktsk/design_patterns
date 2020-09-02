@@ -1,0 +1,35 @@
+@startuml
+
+' 模版方法模式 + 桥接模式
+abstract class AbstractSetting {
+    # source: Source
+    + AbstractSetting(source: Source): AbstractSetting
+    + getSetting(key: String): String
+    # {abstract} lookupCache(key: String): String
+    # {abstract} putIntoCache(key: String, value: String): void
+}
+
+interface Source {
+    + read(key: String): String
+}
+
+class LocalSetting extends AbstractSetting {
+    + LocalSetting(source: Source): LocalSetting
+}
+
+class RedisSetting extends AbstractSetting {
+    + RedisSetting(source: Source): RedisSetting
+}
+
+class FileSource implements Source
+
+class DatabaseSource implements Source
+
+AbstractSetting o--> Source
+
+FileSource <.. Main
+DatabaseSource <.. Main
+LocalSetting <.. Main
+RedisSetting <.. Main
+
+@enduml

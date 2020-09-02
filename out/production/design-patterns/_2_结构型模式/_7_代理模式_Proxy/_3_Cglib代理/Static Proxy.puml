@@ -1,23 +1,26 @@
 @startuml
 
-interface UserAction {
-    + {abstract} signin(): void
-    + {abstract} signout(): void
-    + {abstract} register(): void
-    + {abstract} forget(): void
+' 该接口来自 cglib.jar 包
+interface MethodInterceptor {
+    + intercept(o: Object, method: Method, args: Object[], methodProxy: MethodProxy): Object
 }
 
-class User implements UserAction
+class User {
+    + signin(): void
+    + signout(): void
+    + register(): void
+    + forget(): void
+}
 
-class ProxyFactory {
-    - target: UserAction
-    + ProxyFactory(target: UserAction): ProxyFactory
+class ProxyFactory implements MethodInterceptor {
+    - target: User
+    + ProxyFactory(target: User): ProxyFactory
     + getProxyInstance(): Object
 }
 
 class Main
 
-UserAction <--o ProxyFactory
+User <--o ProxyFactory
 
 ProxyFactory <.. Main
 User <.. Main
