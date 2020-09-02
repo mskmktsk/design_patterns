@@ -16,9 +16,9 @@ class UserActionProxy implements Action {
 
 class Main
 
-User <--o UserActionProxy
+Action <--o UserActionProxy
 
-Main ..> User
-Main ..> UserActionProxy
+User <.. Main
+UserActionProxy <.. Main
 
 @enduml
