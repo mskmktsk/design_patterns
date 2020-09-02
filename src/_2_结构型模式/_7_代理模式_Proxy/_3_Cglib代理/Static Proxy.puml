@@ -1,0 +1,28 @@
+@startuml
+
+' 该接口来自 cglib.jar 包
+interface MethodInterceptor {
+    + intercept(o: Object, method: Method, args: Object[], methodProxy: MethodProxy): Object
+}
+
+class User {
+    + signin(): void
+    + signout(): void
+    + register(): void
+    + forget(): void
+}
+
+class ProxyFactory implements MethodInterceptor {
+    - target: User
+    + ProxyFactory(target: User): ProxyFactory
+    + getProxyInstance(): Object
+}
+
+class Main
+
+User <--o ProxyFactory
+
+ProxyFactory <.. Main
+User <.. Main
+
+@enduml
