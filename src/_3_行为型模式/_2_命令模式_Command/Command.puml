@@ -1,0 +1,51 @@
+@startuml
+
+interface Command {
+    + {abstract} execute();
+    + {abstract} undo();
+}
+
+class Receiver {
+    + on(): void
+    + off(): void
+}
+
+class OnCommand implements Command {
+    + receiver: Receiver
+    + OnCommand(receiver: Receiver): OnCommand
+}
+
+class OffCommand implements Command {
+    + receiver: Receiver
+    + OffCommand(receiver: Receiver): OffCommand
+}
+
+class Invoker {
+    - onCommands: Command[]
+    - offCommands: Command[]
+    - undoCommand: Command
+
+    + Invoker(): Invoker
+    + setCommand(index: int, on: Command, off: Command): void
+    + on(index; int): void
+    + off(index; int): void
+    + undo(): void
+}
+note left of Invoker: \
+on,off存储形式Array/Map/List\n\
+存储不同索引类型也不同\n这里用数组进行存储
+
+class NoCommand implements Command
+
+Invoker o-- Command
+
+OnCommand o--> Receiver
+OffCommand o--> Receiver
+
+client ..> Invoker
+client ..> Command
+client ..> OnCommand
+client ..> OffCommand
+client ..> Receiver
+
+@enduml
