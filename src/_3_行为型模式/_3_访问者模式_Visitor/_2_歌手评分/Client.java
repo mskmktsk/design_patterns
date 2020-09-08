@@ -4,7 +4,7 @@ public class Client {
     public static void main(String[] args) {
         ObjectStructure objectStructure = new ObjectStructure();
 
-        System.out.println("===== 男人/女人 是一种不变的数据结构 =====");
+        System.out.println("===== 男人/女人 是一种稳定的数据结构 =====");
         objectStructure.attach(new Man());
         objectStructure.attach(new WoMan());
 
