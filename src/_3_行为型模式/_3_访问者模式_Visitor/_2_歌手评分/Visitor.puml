@@ -1,0 +1,38 @@
+@startuml
+
+interface Action {
+    + {abstract} getManResult(man: Man): void
+    + {abstract} getWoManResult(woman: WoMan): void
+}
+note left of Action: 访问者 Visitor 这里用 Action 表示
+
+class Success implements Action
+class Fail implements Action
+
+abstract class Person {
+    + {abstract} accept(visitor: Action): void
+}
+
+class Man extends Person
+class WoMan extends Person
+
+class ObjectStructure {
+    - persons: List<Person>
+    + attach(person: Person): void
+    + detach(person: Person): void
+    + display(visitor: Action): void
+}
+
+class Client
+
+ObjectStructure o--> Action
+ObjectStructure o--> Person
+
+Action <-- Person
+Action --> Man
+Action --> WoMan
+
+Client ..> ObjectStructure
+Client ..> Action
+
+@enduml
