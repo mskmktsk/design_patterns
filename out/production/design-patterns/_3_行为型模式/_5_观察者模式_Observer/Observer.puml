@@ -1,0 +1,15 @@
+@startuml
+
+interface Subject {
+    + {abstract} registerObserver(o: Observer): void
+    + {abstract} removeObserver(o: Observer): void
+    + {abstract} notifyObserver(): void
+}
+
+interface Observer {
+    + {abstract} update(): void
+}
+
+
+
+@enduml
