@@ -1,0 +1,34 @@
+@startuml
+
+package "Memento_Pattern" {
+    class Memento {
+        - state: String
+        + Memento(state: String)
+        + getState(): String
+    }
+
+    class CareTaker {
+        - mementoList: List<Memento>
+        + add(memento: Memento): void
+        + get(index: int): Memento
+    }
+
+    class Originator {
+        - state: String
+        + setState(state: String): void
+        + getState(): String
+        + saveStateToMemento(): Memento
+        + getStateFromMemento(memento: Memento): void
+    }
+}
+
+class Client {
+    + main(): void
+}
+
+Client ..> Memento_Pattern: uses
+
+Memento <-- Originator
+Memento <--o CareTaker
+
+@enduml

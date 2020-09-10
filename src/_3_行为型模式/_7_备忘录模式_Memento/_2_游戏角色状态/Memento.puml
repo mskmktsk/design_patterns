@@ -1,0 +1,40 @@
+@startuml
+
+package "Memento_Pattern" {
+    class Memento {
+        - atk: int
+        - def: int
+        + Memento(atk: int, def: int)
+        + getAtk(): int
+        + getDef(): int
+    }
+
+    class CareTaker {
+        - memento: Memento
+        + add(memento: Memento): void
+        + get(): Memento
+    }
+
+    class GameRole {
+        - atk: int
+        - def: int
+        + display(): void
+        + saveRoleToMemento(): Memento
+        + recoverRoleFromMemento(memento: Memento): void
+        + getAtk(): int
+        + getDef(): int
+        + setAtk(atk: int): void
+        + setDef(def: int): void
+    }
+}
+
+class Client {
+    + main(): void
+}
+
+Client ..> Memento_Pattern: uses
+
+Memento <-- GameRole
+Memento <--o CareTaker
+
+@enduml
