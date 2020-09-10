@@ -1,15 +1,37 @@
 @startuml
 
-interface Subject {
-    + {abstract} registerObserver(o: Observer): void
-    + {abstract} removeObserver(o: Observer): void
-    + {abstract} notifyObserver(): void
+interface Store {
+    - observers: List<ProductObserver>
+    - products: Map<String, Product>
+
+    + registerObserver(o: ProductObserver): void
+    + removeObserver(o: ProductObserver): void
+    + addNewProduct(name: String, price: double): void
+    + setProductPrice(name: String, price: double): void
 }
 
-interface Observer {
-    + {abstract} update(): void
+class Product {
+    - name: String
+    - price: double
+    + Product(name: String, price: double): Product
+    + getName(): String
+    {method} ...
 }
 
+interface ProductObserver {
+    + {abstract} onPublished(Product): void
+    + {abstract} onPriceChanged(Product): void
+}
 
+class Customer implements ProductObserver
+class Admin implements ProductObserver
+
+Store o--> ProductObserver
+
+Product <-- ProductObserver
+Product <--o Store
+
+client ..> Store
+client ..> ProductObserver
 
 @enduml
