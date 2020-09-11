@@ -1,0 +1,23 @@
+@startuml
+
+package "State_Pattern" {
+    interface State {
+        + {abstract} doAction(context: Context): void
+    }
+
+    class Context {
+        - state: State
+        + getState(): State
+        + setState(state: State): void
+    }
+
+    class StartState implements State
+    class StopState implements State
+}
+
+client ..> State_Pattern: asks
+
+Context o--> State
+Context <.. State
+
+@enduml

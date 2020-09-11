@@ -1,0 +1,22 @@
+@startuml
+
+package "bot" {
+    interface State {
+        + {abstract} init(): String
+        + {abstract} reply(input: String): String
+    }
+
+    class BotContext {
+        - state: State
+        + chat(input: String): String
+    }
+
+    class ConnectedState implements State
+    class DisconnectedState implements State
+}
+
+client ..> bot: asks
+
+BotContext o--> State
+
+@enduml
